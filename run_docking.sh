@@ -45,13 +45,19 @@ echo "DONE 1: Crear archivo INSPH"
 
 sphgen -i INSPH -o OUTSPH
 
+cat OUTSPH
+
+echo "Continue?"
+read -p ""
 #############################################
 #2. Seleccionar Esferas Relevantes
 #############################################
 
-sphere_selector ${protein_name}_receptor_noH.sph ../001_structure/${protein_name}_ligand_wH.mol2 6.0
+sphere_selector ${protein_name}_receptor_noH.sph ../001_structure/${protein_name}_ligand_wH.mol2 10.0
 echo "DONE 2: Select Relevant Spheres"
 
+echo "Continue?"
+read -p ""
 #############################################
 # 3. Generate Box
 #############################################
@@ -61,7 +67,7 @@ cd "$base_directory/003_gridbox" || exit
 
 cat > showbox.in <<EOF
 Y
-8.0
+5.0
 ../002_surface_spheres/selected_spheres.sph
 1
 ${protein_name}.box.pdb
@@ -72,6 +78,8 @@ showbox < showbox.in
 
 echo "DONE 3: Generated Box"
 
+echo "Continue?"
+read -p ""
 #############################################
 #4. Grid Generation
 #############################################
@@ -109,6 +117,8 @@ echo "============================================="
 
 echo "DONE 4. Grid Generation"
 
+echo "Continue?"
+read -p ""
 #############################################
 # 5. Energy Minimization
 #############################################
@@ -183,7 +193,8 @@ echo "============================================="
 
 
 echo "DONE 5: Energy Minimization"
-
+echo "Continue?"
+read -p ""
 ########################
 # 6. Docking
 ########################
@@ -275,6 +286,8 @@ cat flex.out
 echo "============================================="
 
 echo "DONE: 6. Docking" 
+echo "Continue?"
+read -p ""
 
 #################################################
 # 7. Footprinting
@@ -350,6 +363,8 @@ cat footprint.out
 echo "============================================="
 
 echo "DONE 7. Footprinting"
+echo "Continue?"
+read -p ""
 
 #################################################
 # 8. Virtual Screen
@@ -446,13 +461,9 @@ echo "============================================="
 cat virtual.out
 echo "============================================="
 
-
-
-
-
-
 echo "DONE 8. Virtual Screen"
-
+echo "Continue?"
+read -p ""
 #################################################
 # 9. Cartesian Energy Minimization
 #################################################
@@ -533,7 +544,8 @@ cat cart_min.virtual.mpi.out
 echo "============================================="
 
 echo "DONE 9. Cartesian Energy Minimization"
-
+echo "Continue?"
+read -p ""
 
 ##################################################
 # 10. Rescoring
